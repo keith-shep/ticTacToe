@@ -1,3 +1,5 @@
+// Samples for testing
+
 row1 = ["x", "x", "x"]
 row2 = ["o", "o", "o"]
 row3 = ["x", "o", "x"]
@@ -41,7 +43,10 @@ successRows = [
         ];
 
 /* ----------------------------------------------------------------------------------- */
+//JS Functions
 
+
+//Changes the current player
 const playerSettings = {
         currentPlayer: 'x',
         setCurrentPlayer: function() {
@@ -52,6 +57,8 @@ const playerSettings = {
         }
 }
 
+
+//Adds a counter to the tictactoe array
 const placeCounter = function(counter, position, arr) {
     if (
         (counter == "x" || counter == "o")
@@ -65,6 +72,7 @@ const placeCounter = function(counter, position, arr) {
     }
 };
 
+//Retrieves an array of 8 rows from grid: 3 vertical, 3 horizontal and 2 diagonal rows
 const getRowPermutations = function(grid) {
         let inner = [];
         let outer = [];
@@ -77,6 +85,8 @@ const getRowPermutations = function(grid) {
         return outer;
 }
 
+
+//Checks if a row has all x's or o's
 const checkThreeInARow = function(row) {
         counterPiece = row[0];
 
@@ -89,6 +99,7 @@ const checkThreeInARow = function(row) {
         }
 }
 
+//Checks if a grid has x or o as a winner
 const checkGridForWin = function(rows) {
         const [winner] = rows.map((row) => checkThreeInARow(row))
                    .filter((row) => row != undefined);
@@ -96,11 +107,40 @@ const checkGridForWin = function(rows) {
         return winner;
 }
 
+//Checks if the grid is full
 const isGridFull = function(grid) {
         occupiedSpaces = grid.filter((space) => space != undefined);
         return occupiedSpaces.length == 9;
 }
 
+
 const printEndGameMessage = function() {
         
 }
+
+/* ----------------------------------------------------------------------------------- */
+// JS HTML DOM & Events
+
+const grid = document.querySelector('.grid');
+
+const hello = function() {
+        alert("hello");
+}
+
+//Render array to grid
+const renderArr = function(arr, i) {
+        return arr[i];
+}
+
+//Main
+const main = (function() {
+        for (let i = 0; i < 9; i++) {
+                const square = document.createElement('div');
+                square.classList = "square";
+                square.setAttribute("id", `square-${i}`);
+                square.addEventListener("click", hello);
+                square.textContent = renderArr(arr2, i);
+                grid.appendChild(square);
+        }
+})()
+
