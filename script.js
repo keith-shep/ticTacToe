@@ -47,9 +47,9 @@ successRows = [
 
 
 //Changes the current player
-const playerSettings = {
+const player = {
         currentPlayer: 'x',
-        setCurrentPlayer: function() {
+        setNextPlayer: function() {
                 this.currentPlayer == 'x' ? this.currentPlayer = 'o' : this.currentPlayer = 'x';
         },
         getCurrentPlayer: function() {
@@ -100,7 +100,8 @@ const checkThreeInARow = function(row) {
 }
 
 //Checks if a grid has x or o as a winner
-const checkGridForWin = function(rows) {
+const checkGridForWin = function(grid) {
+        const rows = getRowPermutations(grid)
         const [winner] = rows.map((row) => checkThreeInARow(row))
                    .filter((row) => row != undefined);
 
@@ -113,13 +114,14 @@ const isGridFull = function(grid) {
         return occupiedSpaces.length == 9;
 }
 
-
-const printEndGameMessage = function() {
-        
+const restartGame = function() {
+        myArr = [];
 }
 
 /* ----------------------------------------------------------------------------------- */
 // JS HTML DOM & Events
+
+
 
 const grid = document.querySelector('.grid');
 
@@ -132,15 +134,60 @@ const renderArr = function(arr, i) {
         return arr[i];
 }
 
-//Main
-const main = (function() {
+//Create empty grid
+const createGrid = (function() {
         for (let i = 0; i < 9; i++) {
                 const square = document.createElement('div');
                 square.classList = "square";
                 square.setAttribute("id", `square-${i}`);
-                square.addEventListener("click", hello);
-                square.textContent = renderArr(arr2, i);
+                // square.addEventListener("click", hello);
                 grid.appendChild(square);
         }
 })()
 
+//Populate grid with array values
+const renderGridValues = function(arr) {
+        const square = document.querySelectorAll(".square");
+        square.forEach(function(element, index) {
+                element.textContent = arr[index];
+        })
+}
+
+let displayPlayer = document.querySelector('.current-player');
+displayPlayer.textContent = `Player ${player.currentPlayer}'s turn!`;
+
+//Main function
+const main = (function() {
+        const square = document.querySelectorAll(".square");
+        square.forEach(function(element, index) {
+                element.addEventListener('click', function(){
+                        if (myArr[index] != undefined) {
+                                alert("Click on an empty spot on the grid");
+                        } else {
+                                placeCounter(player.getCurrentPlayer(), index, myArr);
+                                renderGridValues(myArr);
+                                player.setNextPlayer()
+                                displayPlayer.textContent = `Player ${player.currentPlayer}'s turn!`;
+
+                                if (winner = checkGridForWin(myArr)) {
+                                        alert(`${winner} wins!`);
+                                } else if (isGridFull(myArr)) {
+                                        alert(`It's a tie!`); 
+                                } 
+                        }
+                })
+        })
+})()
+
+
+
+
+/*
+TODO
+[x] Prevent clicking in an occupied space
+[x] Check for win
+[x] Display current player
+[] Restart game
+[x] Is grid full check
+[] Minimize global variables & Functions
+*/
