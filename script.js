@@ -1,50 +1,5 @@
-// Samples for testing
-
-row1 = ["x", "x", "x"]
-row2 = ["o", "o", "o"]
-row3 = ["x", "o", "x"]
-row4 = [   ,    , "x"]
-row5 = [   ,    ,    ]
-
-
-myArr = [   ,    ,    ,
-        ,    ,    ,
-        ,    ,    ,];
-
-arr1 = ["x", "o", "x",
-        "o", "x",    ,
-        "x",    , "o",];
-
-arr2 = ["o",    , "x",
-        "o", "x",    ,
-        "o",    , "x",];
-
-arr3 = ["x", "o", "x",
-        "o", "x", "o",
-        "o", "x", "o",];
-
-arr4 = ["x",    , "x",
-        "o", "o", "o",
-        "x",    , "o",];
-
-arr5 = ["x", "x", "x",
-        "o",    , "o",
-        "x", "o", "o",];
-
-successRows = [
-        [0, 1, 2],
-        [3, 4, 5],
-        [6, 7, 8],
-        [0, 3, 6],
-        [1, 4, 7],
-        [2, 5, 8],
-        [0, 4, 8],
-        [2, 4, 6],
-        ];
-
 /* ----------------------------------------------------------------------------------- */
 //JS Functions
-
 
 //Changes the current player
 const player = {
@@ -56,7 +11,6 @@ const player = {
                 return this.currentPlayer;
         }
 }
-
 
 //Adds a counter to the tictactoe array
 const placeCounter = function(counter, position, arr) {
@@ -84,7 +38,6 @@ const getRowPermutations = function(grid) {
         }
         return outer;
 }
-
 
 //Checks if a row has all x's or o's
 const checkThreeInARow = function(row) {
@@ -120,8 +73,6 @@ const restartGame = function() {
 
 /* ----------------------------------------------------------------------------------- */
 // JS HTML DOM & Events
-
-
 
 const grid = document.querySelector('.grid');
 
@@ -179,15 +130,20 @@ const main = (function() {
         })
 })()
 
+/* ----------------------------------------------------------------------------------- */
+// Samples for testing
 
+myArr = [   ,    ,    ,
+        ,    ,    ,
+        ,    ,    ,];
 
-
-/*
-TODO
-[x] Prevent clicking in an occupied space
-[x] Check for win
-[x] Display current player
-[] Restart game
-[x] Is grid full check
-[] Minimize global variables & Functions
-*/
+successRows = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6],
+        ];
